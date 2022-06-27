@@ -11,7 +11,16 @@ const app = express();
 
 app.get('/', (req, res) => {
     // send string to whoever makes a request to the root route
-    res.send('hi there');
+    res.send(`
+        <div>
+            <form>
+                <input placeholder="email" />
+                <input placeholder="password" />
+                <input placeholder="password confirmation" />
+                <button>Sign Up</button>
+            </form>
+        </div>
+    `);
 });
 
 //              // ************************ //
