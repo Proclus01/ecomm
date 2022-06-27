@@ -30,7 +30,13 @@ app.get('/', (req, res) => {
 // **************** POST ****************** //
 
 app.post('/', (req, res) => {
-    // 1. Send string to whoever makes a request to the root route
+    // Access attributes of email, password, passwordConfirmation in form
+    // Save these attributes as user data
+    req.on('data', (data) => {
+        // This will log a buffer to the server terminal
+        // It will look like: < Buffer 65 69 61 63 ... >
+        console.log(data);
+    });
     res.send('Account created!!!');
 });
 
