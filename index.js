@@ -1,5 +1,6 @@
 //jshint esversion:11
 import express from 'express';
+import bodyParser from 'body-parser';
 
 // *******************************************
 //                          
@@ -10,56 +11,6 @@ import express from 'express';
 // *******************************************
 
 const app = express();
-
-// **************************************** //
-
-//
-
-//     // ************************ //       //
-//     //                          //       //
-//     //        Functions         //       //
-//     //                          //       //
-//     // ************************ //       //
-
-// Simple body-parser clone for testing
-const bodyParser = (req, res, next) => {
-
-    // wrap our req.on with validation to check if we have a POST method
-    if (req.method === 'POST') {
-
-        req.on('data', (data) => {
-
-            // Convert data from buffer form to utf-8 and store in array
-            const parsed = data.toString('utf8').split('&');
-            const formData = {}; // This will store our key-value pairs
-    
-            // Iterate over array and read key-value pairs from string
-            for (let pair of parsed) {
-                const [key, value] = pair.split('=');
-    
-                // Add the key-value pair to our object
-                formData[key] = value;
-            }
-    
-            // add form data to body to capture in app.post
-            req.body = formData;
-
-            // tell express to continue
-            next();
-
-        }); // end req.on
-    }
-    else {
-        // tell express to continue
-        next();
-    }
-}; // end bodyParser
-
-//
-
-// **************************************** //
-
-// 
 
 //     // ************************ //       //
 //     //                          //       //
@@ -87,7 +38,9 @@ app.get('/', (req, res) => {
 
 // **************** POST ****************** //
 
-app.post('/', bodyParser, (req, res) => {
+// pass in bodyParser method to parameters in app.post to parse our data
+
+app.post('/', bodyParser.urlencoded({ extended: true }), (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     console.log(req.body);
@@ -111,3 +64,17 @@ app.listen(3000, () => {
     // listen for messages at this port
     console.log('listening on port 3000');
 });
+
+// **************************************** //
+
+//
+
+//     // ************************ //       //
+//     //                          //       //
+//     //        Functions         //       //
+//     //                          //       //
+//     // ************************ //       //
+
+//
+
+// **************************************** //
