@@ -41,8 +41,20 @@ app.post('/', (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     req.on('data', (data) => {
-        // Convert data from buffer form to utf-8
-        console.log(data.toString('utf8'));
+
+        // Convert data from buffer form to utf-8 and store in array
+        const parsed = data.toString('utf8').split('&');
+        const formData = {}; // This will store our key-value pairs
+
+        // Iterate over array and read key-value pairs from string
+        for (let pair of parsed) {
+            const [key, value] = pair.split('=');
+
+            // Add the key-value pair to our object
+            formData[key] = value;
+        }
+
+        console.log(formData);
     });
     res.send('Account created!!!');
 });
