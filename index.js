@@ -3,15 +3,17 @@ import express from 'express';
 
 const app = express();
 
-//              // ************************ //
-//              //                          //
-//              //      Route Handler       //
-//              //                          //
-//              // ************************ //
+//     // ************************ //
+//     //                          //
+//     //      Route Handlers      //
+//     //                          //
+//     // ************************ //
+
+// **************** GET ******************* //
 
 app.get('/', (req, res) => {
-    // send string to whoever makes a request to the root route
-    // configure the form to make a POST request 
+    // 1. Send string to whoever makes a request to the root route
+    // 2. Configure the form to make a POST request 
     // then pick up the request in a method below
     res.send(`
         <div>
@@ -25,11 +27,20 @@ app.get('/', (req, res) => {
     `);
 });
 
-//              // ************************ //
-//              //                          //
-//              //        Listener          //
-//              //                          //
-//              // ************************ //
+// **************** POST ****************** //
+
+app.post('/', (req, res) => {
+    // 1. Send string to whoever makes a request to the root route
+    res.send('Account created!!!');
+});
+
+// **************************************** //
+
+//     // ************************ //
+//     //                          //
+//     //        Listener          //
+//     //                          //
+//     // ************************ //
 
 app.listen(3000, () => {
     // listen for messages at this port
