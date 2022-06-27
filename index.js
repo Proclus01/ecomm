@@ -1,6 +1,14 @@
 //jshint esversion:11
 import express from 'express';
 
+// *******************************************
+//                          
+//          APP DESCR:
+//          This server app creates an HTML form at root route
+//          User data is captured by POST and saved 
+//                          
+// *******************************************
+
 const app = express();
 
 //     // ************************ //       //
@@ -33,9 +41,8 @@ app.post('/', (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     req.on('data', (data) => {
-        // This will log a buffer to the server terminal
-        // It will look like: < Buffer 65 69 61 63 ... >
-        console.log(data);
+        // Convert data from buffer form to utf-8
+        console.log(data.toString('utf8'));
     });
     res.send('Account created!!!');
 });
