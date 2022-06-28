@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 //                          
 //          APP DESCR:
 //          This server app creates an HTML form at root route
-//          User data is captured by POST and saved 
+//          User data is captured by POST and saved.
 //                          
 // *******************************************
 
