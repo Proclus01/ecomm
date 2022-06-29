@@ -16,8 +16,12 @@ class UsersRepository {
             // Use accessSync in constructor since async doesn't work here
             fs.accessSync(this.filename);
         } catch (err) {
+            // Add empty array to new file
             fs.writeFileSync(this.filename, '[]'); // Same for writeFileSync
         }
         
     }
 }
+
+// Make a users.json file with an empty array inside of it
+const repo = new UsersRepository('users.json');
