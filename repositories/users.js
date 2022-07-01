@@ -20,23 +20,20 @@ class UsersRepository {
             fs.writeFileSync(this.filename, '[]'); // Same for writeFileSync
         }
     } // end constructor
-    async getAll() {
-        // Open the file called this.filename
-        const contents = await fs.promises.readFile(this.filename, { encoding: 'utf8' });
 
-        // Read its contents
-        console.log(contents);
-
-        // parse the contents
-
-        // Return the parsed data
+    // getAll is a READ function for our data store
+    async getAll() { 
+        // Open the users repository, get every user, return JSON object of data
+        return JSON.parse(await fs.promises.readFile(this.filename, { encoding: 'utf8' }));
     }
 }
 
 const test = async () => {
     const repo = new UsersRepository('users.json');
 
-    await repo.getAll();
+    const users = await repo.getAll();
+
+    console.log(users);
 };
 
 // Make a users.json file with an empty array inside of it
