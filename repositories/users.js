@@ -19,9 +19,27 @@ class UsersRepository {
             // Add empty array to new file
             fs.writeFileSync(this.filename, '[]'); // Same for writeFileSync
         }
-        
+    } // end constructor
+    async getAll() {
+        // Open the file called this.filename
+        const contents = await fs.Promises.readFile(this.filename, { encoding: 'utf8' });
+
+        // Read its contents
+        console.log(contents);
+
+        // parse the contents
+
+        // Return the parsed data
     }
 }
 
+const test = async () => {
+    const repo = new UsersRepository('users.json');
+
+    await repo.getAll();
+};
+
 // Make a users.json file with an empty array inside of it
 const repo = new UsersRepository('users.json');
+
+test();
