@@ -1,4 +1,14 @@
+//jshint esversion:11
 import fs from 'fs';
+
+// ******************************************************************************** //
+//                                                                                  //           
+//          APP DESCR:                                                              //
+//          The purpose of 'users.js' is to create a data store                     //
+//          and use it as a database to store user data.                            //
+//          The data store supports all CRUD operations + some SQL analogues        //
+//                                                                                  //
+// ******************************************************************************** //
 
 class UsersRepository {
     constructor(filename) {
