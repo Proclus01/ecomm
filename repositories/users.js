@@ -36,6 +36,19 @@ class UsersRepository {
         // Open the users repository, get every user, return JSON object of data
         return JSON.parse(await fs.promises.readFile(this.filename, { encoding: 'utf8' }));
     }
+
+    // the create function will take some attributes that a user should have
+    // and that record will be taken and stored inside of our data file
+    async create(attrs) {
+        // take email and password information and write it to users.json file
+
+        // capture and store data
+        const records = await this.getAll();
+        records.push(attrs);
+
+        // write the updated 'records' array back to users.json
+        await fs.promises.writeFile(this.filename, JSON.stringify(records));
+    }
 }
 
 const test = async () => {
