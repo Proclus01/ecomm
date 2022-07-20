@@ -52,6 +52,7 @@ class UsersRepository {
 
     // writeAll is a helper function for writing all user information to the repository
     async writeAll(records) {
+        // stringify params: input = records; evaluation function = null; indentation = 2
         await fs.promises.writeFile(this.filename, JSON.stringify(records, null, 2));
     }
 }
