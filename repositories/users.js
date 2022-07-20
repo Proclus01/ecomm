@@ -47,6 +47,11 @@ class UsersRepository {
         records.push(attrs);
 
         // write the updated 'records' array back to users.json
+        await this.writeAll(records);
+    }
+
+    // writeAll is a helper function for writing all user information to the repository
+    async writeAll(records) {
         await fs.promises.writeFile(this.filename, JSON.stringify(records));
     }
 }
