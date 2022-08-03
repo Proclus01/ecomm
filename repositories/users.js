@@ -83,12 +83,31 @@ class UsersRepository {
         // rewrite to our data store
         await this.writeAll(filteredRecords);
     }
+
+    // update one record by ID and attributes
+    async update (id, attrs) {
+        const records = await this.getAll();
+
+        const record = records.find(record => record.id === id);
+
+        if (!record) {
+            throw new Error(`Record with id ${id} not found.`);
+        }
+
+        // take all the properties of attrs and assign it to the copy of record
+        // e.g.:
+        // record == {email: 'test@test.com'};
+        // attrs = {password: 'mypassword'};
+        Object.assign(record, attrs);
+        // record === {email: 'test@test.com', password: 'mypassword'};
+        await this.writeAll(records);
+    }
 }
 
 const test = async () => {
     const repo = new UsersRepository('./repositories/users.json');
 
-    await repo.delete('testID');
+    await repo.create({email: 'test@test.com'});
 };
 
 // Make a users.json file with an empty array inside of it
