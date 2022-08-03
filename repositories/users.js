@@ -107,7 +107,7 @@ class UsersRepository {
 const test = async () => {
     const repo = new UsersRepository('./repositories/users.json');
 
-    await repo.create({email: 'test@test.com'});
+    await repo.update('nonexistentID', {password: 'akjshfadsfkjhb'});
 };
 
 // Make a users.json file with an empty array inside of it
