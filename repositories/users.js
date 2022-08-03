@@ -95,11 +95,9 @@ class UsersRepository {
         }
 
         // take all the properties of attrs and assign it to the copy of record
-        // e.g.:
-        // record == {email: 'test@test.com'};
-        // attrs = {password: 'mypassword'};
         Object.assign(record, attrs);
-        // record === {email: 'test@test.com', password: 'mypassword'};
+
+        // rewrite to our data store
         await this.writeAll(records);
     }
 }
