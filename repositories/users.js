@@ -1,5 +1,6 @@
 //jshint esversion:11
 import fs from 'fs';
+import crypto from 'crypto';
 
 // ******************************************************************************** //
 //                                                                                  //           
@@ -42,6 +43,9 @@ class UsersRepository {
     async create(attrs) {
         // take email and password information and write it to users.json file
 
+        // Create a random ID with 4 bytes in hexadecimal
+        attrs.id = this.randomId();
+
         // capture and store data
         const records = await this.getAll();
         records.push(attrs);
@@ -55,10 +59,15 @@ class UsersRepository {
         // stringify params: input = records; evaluation function = null; indentation = 2
         await fs.promises.writeFile(this.filename, JSON.stringify(records, null, 2));
     }
+
+    // creates a random user ID using an RNG algo
+    randomId() {
+        return crypto.randomBytes(4).toString('hex');
+    }
 }
 
 const test = async () => {
-    const repo = new UsersRepository('users.json');
+    const repo = new UsersRepository('./repositories/users.json');
 
     await repo.create({email: 'test@test.com', password: 'password'});
 
@@ -68,6 +77,6 @@ const test = async () => {
 };
 
 // Make a users.json file with an empty array inside of it
-const repo = new UsersRepository('users.json');
+const repo = new UsersRepository('./repositories/users.json');
 
 test();
