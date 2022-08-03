@@ -71,14 +71,24 @@ class UsersRepository {
 
         return records.find(record => record.id === id);
     }
+
+    // delete one by ID
+    async delete(id) {
+        // get all our records
+        const records = await this.getAll();
+
+        // create a new array without the ID
+        const filteredRecords = records.filter(record =>  record.id !== id);
+
+        // rewrite to our data store
+        await this.writeAll(filteredRecords);
+    }
 }
 
 const test = async () => {
     const repo = new UsersRepository('./repositories/users.json');
 
-    const user = await repo.getOne('testID');
-
-    console.log(user);
+    await repo.delete('testID');
 };
 
 // Make a users.json file with an empty array inside of it
