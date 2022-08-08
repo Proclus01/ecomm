@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Add cookie-session and pass in config object
 // The config object helps to encrypt the cookie so that users cannot modify cookies on their side
 app.use(cookieSession({
-    keys: ['WqJHeI13QEdSW9PPb'] 
+    keys: ['WqJHeI13QEdSW9PPb'] // encryption key
 }));
 
 // **************** GET ******************* //
@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
     // then pick up the request in a method below
     res.send(`
         <div>
+            Your id is: ${req.session.userId}
             <form method="POST">
                 <input name="email" placeholder="email" />
                 <input name="password" placeholder="password" />
@@ -67,7 +68,7 @@ app.post('/', async (req, res) => {
 
     // Store the id of that user inside the user's cookie
     // so that cookie gets included in all of the followup requests
-
+    req.session.userId = user.id; // added by cookie-session
     
     res.send('Account created!!!');
 });
