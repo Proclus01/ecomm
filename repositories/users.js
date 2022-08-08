@@ -81,10 +81,10 @@ class UsersRepository {
         // split the hash and the salt on the period character
         const [ hashed, salt] = saved.split('.');
 
-        const hashedSupplied = await scrypt(supplied, salt, 64);
+        const hashedSuppliedBuf = await scrypt(supplied, salt, 64);
 
         // Compare the hashed password to the supplied hashed password
-        return hashed === hashedSupplied;
+        return hashed === hashedSuppliedBuf.toString('hex');
     }
 
     // writeAll is a helper function for writing all user information to the repository
