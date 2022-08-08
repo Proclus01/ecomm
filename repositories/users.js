@@ -52,7 +52,7 @@ class UsersRepository {
         // generate a salt
         const salt = crypto.randomBytes(8).toString('hex');
 
-        // Take the password, salt, set string length to 64
+        // Take the password, salt, set key length to 64
         const buf = await scrypt(attrs.password, salt, 64);
 
         // capture and store data
@@ -73,9 +73,18 @@ class UsersRepository {
         return attrs;
     }
 
+    // Take the password, join it to the salt, and check the output against what's in the datastore
     async comparePasswords(saved, supplied) {
         // Saved = password saved in our database in the format of 'hashed.salt'
-        // Supploed = password given to us by a user trying to sign in
+        // Supplied = password given to us by a user trying to sign in
+
+        // split the hash and the salt on the period character
+        const [ hashed, salt] = saved.split('.');
+
+        const hashedSupplied = await scrypt(supplied, salt, 64);
+
+        // Compare the hashed password to the supplied hashed password
+        return hashed === hashedSupplied;
     }
 
     // writeAll is a helper function for writing all user information to the repository
