@@ -1,20 +1,12 @@
 [
   {
-    "email": "test@test.com"
+    "email": "test5@test.com",
+    "password": "e935e25366f4b87814c311a43ab30595a6c015ed658aa5267a039caf16fb3214d883473b03c74f5791771649f19c12565cbac98348ef78be807ecfe4102ecc27.082360c7e3adb49a",
+    "id": "86b692b4"
   },
   {
-    "email": "test2@test.com",
-    "password": "asdjhasfjhadfjh",
-    "id": "79687778"
-  },
-  {
-    "email": "test3@test.com",
-    "password": "GTJ3C3MtuueivaWPW",
-    "id": "5f287bba"
-  },
-  {
-    "email": "test4@test.com",
-    "password": "67w7Uqau3GrRPeqnM",
-    "id": "3d3b46c6"
+    "email": "newuser@user.com",
+    "password": "70428e83c09d6b05aa7af8a38db9c4c67ce44135f7774c1d94040bbd73b997fdb85cc54f160199ea384c3f3b29db3b4bf19f1e22a8248c25c9e228dbe7117d24.237cb4ab5820d018",
+    "id": "1610f83a"
   }
 ]

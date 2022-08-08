@@ -1,6 +1,7 @@
 //jshint esversion:11
 import fs from 'fs';
 import crypto from 'crypto';
+import util from 'util';
 
 // ******************************************************************************** //
 //                                                                                  //           
@@ -10,6 +11,8 @@ import crypto from 'crypto';
 //          The data store supports all CRUD operations + some SQL analogues        //
 //                                                                                  //
 // ******************************************************************************** //
+
+const scrypt = util.promisify(crypto.scrypt);
 
 class UsersRepository {
     constructor(filename) {
@@ -46,14 +49,33 @@ class UsersRepository {
         // Create a random ID with 4 bytes in hexadecimal
         attrs.id = this.randomId();
 
+        // generate a salt
+        const salt = crypto.randomBytes(8).toString('hex');
+
+        // Take the password, salt, set string length to 64
+        const buf = await scrypt(attrs.password, salt, 64);
+
         // capture and store data
         const records = await this.getAll();
-        records.push(attrs);
+
+        // store in the hex-based hashed password and append the salt as well with a . in between
+        const record = {
+            ...attrs,
+            password: `${buf.toString('hex')}.${salt}`
+        };
+
+        // push the encrypted data into the datastore
+        records.push(record);
 
         // write the updated 'records' array back to users.json
         await this.writeAll(records);
 
         return attrs;
+    }
+
+    async comparePasswords(saved, supplied) {
+        // Saved = password saved in our database in the format of 'hashed.salt'
+        // Supploed = password given to us by a user trying to sign in
     }
 
     // writeAll is a helper function for writing all user information to the repository
