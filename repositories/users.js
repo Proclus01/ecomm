@@ -130,6 +130,6 @@ class UsersRepository {
 
 // Export only the instance of this class and not the class itself
 // This lets us keep only ONE copy of the users repo
-module.exports = new UsersRepository('users.json');
+export default new UsersRepository('users.json');
 // This lets us do something like const repo = require('./users');
 // and then we can call methods from the class instance

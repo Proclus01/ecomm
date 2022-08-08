@@ -1,6 +1,7 @@
 //jshint esversion:11
 import express from 'express';
 import bodyParser from 'body-parser';
+import usersRepo from './repositories/users.js';
 
 // *******************************************
 //                          
@@ -39,10 +40,16 @@ app.get('/', (req, res) => {
 
 // pass in bodyParser method to parameters in app.post to parse our data
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
-    console.log(req.body);
+    const { email, password, passwordConfirmation } = req.body;
+
+    const existingUser = await usersRepo.getOneBy({ email });
+
+    if (existingUser) {
+        return res.send('Email in use');
+    }
     
     res.send('Account created!!!');
 });
