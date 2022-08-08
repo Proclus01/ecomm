@@ -23,9 +23,7 @@ app.use(cookieSession({
     keys: ['WqJHeI13QEdSW9PPb'] // encryption key
 }));
 
-// **************** GET ******************* //
-
-app.get('/', (req, res) => {
+app.get('/signup', (req, res) => {
     // 1. Send string to whoever makes a request to the root route
     // 2. Configure the form to make a POST request 
     // then pick up the request in a method below
@@ -44,11 +42,9 @@ app.get('/', (req, res) => {
     `);
 });
 
-// **************** POST ****************** //
-
 // pass in bodyParser method to parameters in app.post to parse our data
 
-app.post('/', async (req, res) => {
+app.post('/signup', async (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     const { email, password, passwordConfirmation } = req.body;
@@ -71,6 +67,29 @@ app.post('/', async (req, res) => {
     req.session.userId = user.id; // added by cookie-session
     
     res.send('Account created!!!');
+});
+
+app.get('/signout', (req, res) => {
+    // tell the browser to forget all the information stored inside the cookie
+    req.session = null;
+    res.send('You are logged out!');
+});
+
+app.get('/signin', (req, res) => {
+    // show the sign in form to the user
+    res.send(`
+    <div>
+    <form method="POST">
+        <input name="email" placeholder="email" />
+        <input name="password" placeholder="password" />
+        <button>Sign In</button>
+    </form>
+    </div>
+    `);
+});
+
+app.post('/signin', async (req, res) => {
+    // 
 });
 
 // **************** LISTENER *************** //
