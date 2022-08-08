@@ -52,6 +52,8 @@ class UsersRepository {
 
         // write the updated 'records' array back to users.json
         await this.writeAll(records);
+
+        return attrs;
     }
 
     // writeAll is a helper function for writing all user information to the repository
