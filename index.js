@@ -1,6 +1,7 @@
 //jshint esversion:11
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
 import usersRepo from './repositories/users.js';
 
 // *******************************************
@@ -15,6 +16,12 @@ const app = express();
 
 // Automatically use body-parser in every route handler in this file
 app.use(bodyParser.urlencoded({ extended: true })); 
+
+// Add cookie-session and pass in config object
+// The config object helps to encrypt the cookie so that users cannot modify cookies on their side
+app.use(cookieSession({
+    keys: ['WqJHeI13QEdSW9PPb'] 
+}));
 
 // **************** GET ******************* //
 
@@ -60,6 +67,7 @@ app.post('/', async (req, res) => {
 
     // Store the id of that user inside the user's cookie
     // so that cookie gets included in all of the followup requests
+
     
     res.send('Account created!!!');
 });
