@@ -136,7 +136,4 @@ const test = async () => {
     console.log(user);
 };
 
-// Make a users.json file with an empty array inside of it
-const repo = new UsersRepository('./repositories/users.json');
-
 test();
