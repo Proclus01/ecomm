@@ -128,12 +128,8 @@ class UsersRepository {
     }
 }
 
-const test = async () => {
-    const repo = new UsersRepository('./repositories/users.json');
-
-    const user = await repo.getOneBy({id: 'f44a8713', email: 'fail@test.com'});
-
-    console.log(user);
-};
-
-test();
+// Export only the instance of this class and not the class itself
+// This lets us keep only ONE copy of the users repo
+module.exports = new UsersRepository('users.json');
+// This lets us do something like const repo = require('./users');
+// and then we can call methods from the class instance
