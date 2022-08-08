@@ -100,12 +100,40 @@ class UsersRepository {
         // rewrite to our data store
         await this.writeAll(records);
     }
+
+    // getOneBy accepts a "filters object" {id: 123, email: 'foo@bar.com'} 
+    // containing what you want to filter for
+    // and then getOneBy returns the result of the search based on the filter
+    async getOneBy(filters) {
+        //
+        const records = await this.getAll();
+
+        // iterate over records and if they are not the same then update found to FALSE
+        for (let record of records) { // for ... of iterates through array
+            // temporary variable
+            let found = true;
+
+            // first iterate over all the key-value pairs of the filters object
+            for (let key in filters) { // for ... in iterates through object
+                // if there are no matches, set found to false
+                if (record[key] !== filters[key]) {
+                    found = false;
+                }
+            }
+
+            if (found) {
+                return record;
+            }
+        }
+    }
 }
 
 const test = async () => {
     const repo = new UsersRepository('./repositories/users.json');
 
-    await repo.update('nonexistentID', {password: 'akjshfadsfkjhb'});
+    const user = await repo.getOneBy({id: 'f44a8713', email: 'fail@test.com'});
+
+    console.log(user);
 };
 
 // Make a users.json file with an empty array inside of it
