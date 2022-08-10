@@ -1,27 +1,15 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import cookieSession from 'cookie-session';
 import usersRepo from '../../repositories/users.js';
+import signupTemplate from '../../views/admin/auth/signup.js';
+import signinTemplate from '../../views/admin/auth/signin.js';
 
-const router = express.Router();
+const router = express.Router(); // subrouter
 
 router.get('/signup', (req, res) => {
     // 1. Send string to whoever makes a request to the root route
     // 2. Configure the form to make a POST request 
     // then pick up the request in a method below
-    res.send(`
-        <div>
-            Your id is: ${req.session.userId}
-            <form method="POST">
-                <input name="email" placeholder="email" />
-                <input name="password" placeholder="password" />
-                <input 
-                    name="passwordConfirmation" 
-                    placeholder="password confirmation" />
-                <button>Sign Up</button>
-            </form>
-        </div>
-    `);
+    res.send(signupTemplate({ req }));
 });
 
 // pass in bodyParser method to parameters in router.post to parse our data
@@ -59,15 +47,7 @@ router.get('/signout', (req, res) => {
 
 router.get('/signin', (req, res) => {
     // show the sign in form to the user
-    res.send(`
-    <div>
-    <form method="POST">
-        <input name="email" placeholder="email" />
-        <input name="password" placeholder="password" />
-        <button>Sign In</button>
-    </form>
-    </div>
-    `);
+    res.send(signinTemplate({ req }));
 });
 
 // If user did not sign up with email, then show error
