@@ -1,4 +1,11 @@
-app.get('/signup', (req, res) => {
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
+import usersRepo from '../../repositories/users.js';
+
+const router = express.Router();
+
+router.get('/signup', (req, res) => {
     // 1. Send string to whoever makes a request to the root route
     // 2. Configure the form to make a POST request 
     // then pick up the request in a method below
@@ -17,9 +24,9 @@ app.get('/signup', (req, res) => {
     `);
 });
 
-// pass in bodyParser method to parameters in app.post to parse our data
+// pass in bodyParser method to parameters in router.post to parse our data
 
-app.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     const { email, password, passwordConfirmation } = req.body;
@@ -44,13 +51,13 @@ app.post('/signup', async (req, res) => {
     res.send('Account created!!!');
 });
 
-app.get('/signout', (req, res) => {
+router.get('/signout', (req, res) => {
     // tell the browser to forget all the information stored inside the cookie
     req.session = null;
     res.send('You are logged out!');
 });
 
-app.get('/signin', (req, res) => {
+router.get('/signin', (req, res) => {
     // show the sign in form to the user
     res.send(`
     <div>
@@ -66,7 +73,7 @@ app.get('/signin', (req, res) => {
 // If user did not sign up with email, then show error
 // If username and pw do not match, then show error
 // Otherwise, sign in
-app.post('/signin', async (req, res) => {
+router.post('/signin', async (req, res) => {
     const { email, password } = req.body;
 
     const user = await usersRepo.getOneBy({ email });
@@ -88,3 +95,5 @@ app.post('/signin', async (req, res) => {
 
     res.send('You are signed in!!!');
 });
+
+export default router;

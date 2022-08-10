@@ -2,7 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
-import usersRepo from './repositories/users.js';
+import authRouter from './routes/admin/auth.js';
 
 // *******************************************
 //                          
@@ -23,7 +23,7 @@ app.use(cookieSession({
     keys: ['WqJHeI13QEdSW9PPb'] // encryption key
 }));
 
-
+app.use(authRouter);
 
 // **************** LISTENER *************** //
 
