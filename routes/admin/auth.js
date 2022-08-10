@@ -47,7 +47,7 @@ router.get('/signout', (req, res) => {
 
 router.get('/signin', (req, res) => {
     // show the sign in form to the user
-    res.send(signinTemplate({ req }));
+    res.send(signinTemplate());
 });
 
 // If user did not sign up with email, then show error

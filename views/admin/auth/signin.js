@@ -1,4 +1,4 @@
-const signin = ({ req }) => {
+const signin = () => {
     return `
     <div>
     <form method="POST">
