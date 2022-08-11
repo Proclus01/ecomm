@@ -3,6 +3,7 @@ import { check, validationResult } from 'express-validator';
 import usersRepo from '../../repositories/users.js';
 import signupTemplate from '../../views/admin/auth/signup.js';
 import signinTemplate from '../../views/admin/auth/signin.js';
+import validatorChain from './validators.js';
 
 const router = express.Router(); // subrouter
 
@@ -19,31 +20,9 @@ router.post(
     '/signup', 
     [   // express-validator array
         // first do sanitization, then validation
-        check('email')
-            .trim()
-            .normalizeEmail()
-            .isEmail()
-            .withMessage('Must be a valid email')
-            .custom( async (email) => { // custom validator
-                const existingUser = await usersRepo.getOneBy({ email });
-
-                if (existingUser) {
-                    throw new Error('Email in use');
-                }
-            }),
-        check('password')
-            .trim()
-            .isLength({ min: 4, max: 20 })
-            .withMessage('Must be between 4 and 20 characters long'),
-        check('passwordConfirmation')
-            .trim()
-            .isLength({ min: 4, max: 20 })
-            .withMessage('Must be between 4 and 20 characters long')
-            .custom( (passwordConfirmation, { req }) => {
-                if (passwordConfirmation !== req.body.password) {
-                    throw new Error('Passwords must match');
-                }
-            })
+        validatorChain.requireEmail,
+        validatorChain.requirePassword,
+        validatorChain.requirePasswordConfirmation
     ],
     async (req, res) => {
     // Results of any express-validator errors
