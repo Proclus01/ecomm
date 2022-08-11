@@ -22,13 +22,16 @@ router.post(
         check('email')
             .trim()
             .normalizeEmail()
-            .isEmail(),
+            .isEmail()
+            .withMessage('Must be a valid email'),
         check('password')
             .trim()
-            .isLength({ min: 4, max: 20 }),
+            .isLength({ min: 4, max: 20 })
+            .withMessage('Must be between 4 and 20 characters long'),
         check('passwordConfirmation')
             .trim()
             .isLength({ min: 4, max: 20 })
+            .withMessage('Must be between 4 and 20 characters long')
     ],
     async (req, res) => {
     // Results of any express-validator errors
