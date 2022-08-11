@@ -18,8 +18,7 @@ router.get('/signup', (req, res) => {
 
 router.post(
     '/signup', 
-    [   // express-validator array
-        // first do sanitization, then validation
+    [   
         validatorChain.requireEmail,
         validatorChain.requirePassword,
         validatorChain.requirePasswordConfirmation
@@ -28,7 +27,9 @@ router.post(
     // Results of any express-validator errors
     const errors = validationResult(req);
 
-    console.log(errors);
+    if (!errors.isEmpty()) {
+        return res.send(signupTemplate({ req, errors }));
+    }
 
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
