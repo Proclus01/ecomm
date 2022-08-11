@@ -18,9 +18,17 @@ router.get('/signup', (req, res) => {
 router.post(
     '/signup', 
     [   // express-validator array
-        check('email').isEmail(),
-        check('password'),
+        // first do sanitization, then validation
+        check('email')
+            .trim()
+            .normalizeEmail()
+            .isEmail(),
+        check('password')
+            .trim()
+            .isLength({ min: 4, max: 20 }),
         check('passwordConfirmation')
+            .trim()
+            .isLength({ min: 4, max: 20 })
     ],
     async (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
