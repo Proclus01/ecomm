@@ -21,13 +21,15 @@ const validatorChain = {
     .isLength({ min: 4, max: 20 })
     .withMessage("Must be between 4 and 20 characters long"),
     
-  requirePasswordConfirmation: check("passwordConfirmation")
+  requirePasswordConfirmation: check('passwordConfirmation')
     .trim()
     .isLength({ min: 4, max: 20 })
     .withMessage("Must be between 4 and 20 characters long")
     .custom((passwordConfirmation, { req }) => {
       if (passwordConfirmation !== req.body.password) {
         throw new Error("Passwords must match");
+      } else {
+        return true;
       }
     })
 };

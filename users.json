@@ -10,18 +10,8 @@
     "id": "1610f83a"
   },
   {
-    "email": "newuser@user.com",
-    "password": "a8c63492b6e76c72e5c7115e9b66f1c94c9f9ded6001e514c965b8425e17403fedd640c43c09a026ed4b751b2acd9d1806926c876e29964eb77011c327fb909c.bcb560159bc63ab5",
-    "id": "0d8e202a"
-  },
-  {
-    "email": "newuser1@user.com",
-    "password": "e5cca358ad533a0737a8f42f88a7eb943b173f6db2f7fc8656e29199cc1fcd561676c76abc2135d2e974315d164362f3280f9f5b02456f27d75594543073ee4f.581513eba0d349e4",
-    "id": "11574080"
-  },
-  {
-    "email": "newuser1@user.com",
-    "password": "a00d1a5af5a60ad959e6392b53008c1746e11d600596716fc50af87d862b016f1ca7791b6c7cab34842324ac7fbbdb4d1a705f00ae31b8be31d676d2c3c467d4.e0f4f1bf0fec6531",
-    "id": "2d5aa47d"
+    "email": "test2@test.com",
+    "password": "344a35675a9b6ed1118fb4e65753ce4aba4a5a6410f277d29ee5f77240f4d92c815e30787c1786e8958ab990a5032b3343ea29c3aad2188dbdddbeaa9067f050.ccc284575d4dd859",
+    "id": "e47b0297"
   }
 ]
