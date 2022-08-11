@@ -1,6 +1,6 @@
 const layout = ({ content }) => {
     return `
-        <DOCTYPE html>
+        <!DOCTYPE html>
         <html>
         <head></head>
             <body>
