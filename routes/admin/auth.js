@@ -31,6 +31,10 @@ router.post(
             .isLength({ min: 4, max: 20 })
     ],
     async (req, res) => {
+    // Results of any express-validator errors
+    const errors = validationResult(req);
+    console.log(errors);
+
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     const { email, password, passwordConfirmation } = req.body;
