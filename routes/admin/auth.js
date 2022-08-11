@@ -1,4 +1,5 @@
 import express from 'express';
+import { check } from 'express-validator';
 import usersRepo from '../../repositories/users.js';
 import signupTemplate from '../../views/admin/auth/signup.js';
 import signinTemplate from '../../views/admin/auth/signin.js';
@@ -14,7 +15,14 @@ router.get('/signup', (req, res) => {
 
 // pass in bodyParser method to parameters in router.post to parse our data
 
-router.post('/signup', async (req, res) => {
+router.post(
+    '/signup', 
+    [   // express-validator array
+        check('email').isEmail(),
+        check('password'),
+        check('passwordConfirmation')
+    ],
+    async (req, res) => {
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
     const { email, password, passwordConfirmation } = req.body;
