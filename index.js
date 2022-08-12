@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import authRouter from './routes/admin/auth.js';
+import productsRouter from './routes/admin/products.js';
 
 // *******************************************
 //                          
@@ -27,6 +28,8 @@ app.use(cookieSession({
 }));
 
 app.use(authRouter);
+
+app.use(productsRouter);
 
 // **************** LISTENER *************** //
 
