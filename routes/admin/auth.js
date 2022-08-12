@@ -59,23 +59,25 @@ router.get('/signin', (req, res) => {
 // If user did not sign up with email, then show error
 // If username and pw do not match, then show error
 // Otherwise, sign in
-router.post('/signin', async (req, res) => {
+router.post(
+    '/signin', 
+    [
+        validatorChain.requireEmailExists,
+        validatorChain.requireValidPasswordForUser
+    ],
+    async (req, res) => {
+
+    const errors = validationResult(req);
+
+    console.log(errors);
+    
+    if (!errors.isEmpty()) {
+        return res.send(signinTemplate({ req, errors }));
+    }
+
     const { email, password } = req.body;
 
     const user = await usersRepo.getOneBy({ email });
-
-    if (!user) {
-        return res.send('Email not found');
-    }
-
-    const validPassword = await usersRepo.comparePasswords(
-        user.password,
-        password
-    );
-
-    if (!validPassword) {
-        return res.send('Invalid password');
-    }
 
     req.session.userId = user.id;
 
