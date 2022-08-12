@@ -14,6 +14,9 @@ import authRouter from './routes/admin/auth.js';
 
 const app = express();
 
+// Make 'public' file public and allow use of CSS file
+app.use(express.static('public'));
+
 // Automatically use body-parser in every route handler in this file
 app.use(bodyParser.urlencoded({ extended: true })); 
 
