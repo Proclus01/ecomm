@@ -7,7 +7,7 @@ const getError = (errors, prop) => {
     } catch (err) {
         return '';
     }
-}
+};
 
 const signup = ({ req, errors }) => {
     return layout({
