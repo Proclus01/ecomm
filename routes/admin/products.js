@@ -1,4 +1,6 @@
 import express from 'express';
+import ProductsRepo from '../../repositories/products.js';
+import productsNewTemplate from '../../views/admin/products/new.js';
 
 const router = express.Router();
 
@@ -11,7 +13,8 @@ router.get(
 router.get(
     '/admin/products/new', 
     (req, res) => {
-    //
+    
+        res.send(productsNewTemplate({}));
 });
 
 export default router;
