@@ -26,6 +26,19 @@ class Repository {
         }
     } // end constructor
 
+    async create(attrs) {
+
+        attrs.id = this.randomId();
+
+        const records = await this.getAll();
+
+        records.push(attrs);
+
+        await this.writeAll(records);
+
+        return attrs;
+    }
+
     // getAll is a READ function for our data store
     async getAll() { 
         // Open the users repository, get every user, return JSON object of data
