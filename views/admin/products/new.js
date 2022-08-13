@@ -1,5 +1,4 @@
 import layout from '../layout.js';
-import helpers from '../../helpers.js';
 
 const productsNewTemplate = ({ errors }) => {
     return layout({
