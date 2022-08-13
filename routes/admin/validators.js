@@ -2,6 +2,15 @@ import { check } from "express-validator";
 import usersRepo from "../../repositories/users.js";
 
 const validatorChain = {
+  requireTitle: check('title')
+    .trim()
+    .isLength({ min: 5, max: 40 }),
+
+  requirePrice: check('price')
+    .trim()
+    .toFloat()
+    .isFloat({ min: 1 }), // converts even erroneous values (char) to a float anyways (to 1)
+
   requireEmail: check("email")
     .trim()
     .normalizeEmail()
