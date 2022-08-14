@@ -26,8 +26,10 @@ router.post(
         validatorChain.requirePrice
     ],
     (req, res) => {
+
         const errors = validationResult(req);
-        console.log(errors);
+        
+        console.log(req.body);
 
         res.send('submitted');
     }
