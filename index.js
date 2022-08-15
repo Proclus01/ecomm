@@ -5,14 +5,6 @@ import cookieSession from 'cookie-session';
 import authRouter from './routes/admin/auth.js';
 import productsRouter from './routes/admin/products.js';
 
-// *******************************************
-//                          
-//          APP DESCR:
-//          This server app creates an HTML form at root route
-//          User data is captured by POST and saved.
-//                          
-// *******************************************
-
 const app = express();
 
 // Make 'public' file public and allow use of CSS file
