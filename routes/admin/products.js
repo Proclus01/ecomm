@@ -62,4 +62,12 @@ router.get(
         res.send(productsEditTemplate({ product }));
 });
 
+router.post(
+    'admin/products/:id/edit',
+    middleware.requireAuth,
+    async (req, res) => {
+        //
+    }
+);
+
 export default router;
