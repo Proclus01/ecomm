@@ -65,6 +65,12 @@ router.get(
 router.post(
     'admin/products/:id/edit',
     middleware.requireAuth,
+    upload.single('image'),
+    [
+        validatorChain.requireTitle,
+        validatorChain.requirePrice
+    ],
+    middleware.handleErrors(productsEditTemplate),
     async (req, res) => {
         //
     }
