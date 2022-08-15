@@ -32,7 +32,7 @@ router.post(
 
         const errors = validationResult(req);
 
-        console.log(req.file);
+        console.log(req.file.buffer.toString('base64'));
 
         res.send('submitted');
     }
