@@ -5,6 +5,7 @@ import middleware from './middlewares.js';
 import ProductsRepo from '../../repositories/products.js';
 import productsNewTemplate from '../../views/admin/products/new.js';
 import productsIndexTemplate from '../../views/admin/products/index.js';
+import productsEditTemplate from '../../views/admin/products/edit.js';
 import validatorChain from './validators.js';
 
 const router = express.Router();
@@ -49,9 +50,16 @@ router.post(
 );
 
 router.get(
-    '/admin/products/:id/edit', 
-    (req, res) => {
-        console.log(req.params.id);
+    '/admin/products/:id/edit',
+    middleware.requireAuth, 
+    async (req, res) => {
+        const product = await ProductsRepo.getOne(req.params.id);
+
+        if (!product) {
+            return res.send('Product not found');
+        }
+
+        res.send(productsEditTemplate({ product }));
 });
 
 export default router;
