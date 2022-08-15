@@ -63,7 +63,7 @@ router.get(
 });
 
 router.post(
-    'admin/products/:id/edit',
+    '/admin/products/:id/edit',
     middleware.requireAuth,
     upload.single('image'),
     [
@@ -72,7 +72,19 @@ router.post(
     ],
     middleware.handleErrors(productsEditTemplate),
     async (req, res) => {
-        //
+        const changes = req.body;
+
+        if (req.file) {
+            changes.image = req.file.buffer.toString('base64');
+        }
+
+        try {
+            await ProductsRepo.update(req.params.id, changes);
+        } catch(err) {
+            return res.send('Could not find item');
+        }
+
+        res.redirect('/admin/products');
     }
 );
 
