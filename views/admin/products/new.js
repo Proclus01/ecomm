@@ -1,10 +1,9 @@
-import layout from '../layout.js';
-import helpers from '../../helpers.js';
-
+import layout from "../layout.js";
+import helpers from "../../helpers.js";
 
 const productsNewTemplate = ({ errors }) => {
-    return layout({
-        content: `
+  return layout({
+    content: `
         <div class="columns is-centered">
           <div class="column is-half">
             <h1 class="subtitle">Create a Product</h1>
@@ -13,27 +12,33 @@ const productsNewTemplate = ({ errors }) => {
               <div class="field">
                 <label class="label">Title</label>
                 <input class="input" placeholder="Title" name="title">
-                <p class="help is-danger">${helpers.getError(errors, 'title')}</p>
+                <p class="help is-danger">${helpers.getError(
+                  errors,
+                  "title"
+                )}</p>
               </div>
               
               <div class="field">
                 <label class="label">Price</label>
                 <input class="input" placeholder="Price" name="price">
-                <p class="help is-danger">${helpers.getError(errors, 'price')}</p>
+                <p class="help is-danger">${helpers.getError(
+                  errors,
+                  "price"
+                )}</p>
               </div>
               
               <div class="field">
                 <label class="label">Image</label>            
                 <input type="file" name="image" />
-                ${helpers.getError(errors, 'image')}
+                ${helpers.getError(errors, "image")}
               </div>
               <br />
               <button class="button is-primary">Create</button>
             </form>
           </div>
         </div>
-      `
-    });
+      `,
+  });
 };
 
 export default productsNewTemplate;
