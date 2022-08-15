@@ -14,7 +14,7 @@ router.get(
     '/admin/products', 
     async (req, res) => {
     
-        const products = await productsRepo.getAll();
+        const products = await ProductsRepo.getAll();
 
         res.send(productsIndexTemplate({ products }));
 });
