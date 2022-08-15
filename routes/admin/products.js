@@ -12,6 +12,7 @@ const upload = multer({ storage: multer.memoryStorage() }); // store to memory a
 
 router.get(
     '/admin/products', 
+    middleware.requireAuth,
     async (req, res) => {
     
         const products = await ProductsRepo.getAll();
@@ -20,7 +21,8 @@ router.get(
 });
 
 router.get(
-    '/admin/products/new', 
+    '/admin/products/new',
+    middleware.requireAuth, 
     (req, res) => {
     
         res.send(productsNewTemplate({}));
@@ -28,6 +30,7 @@ router.get(
 
 router.post(
     '/admin/products/new',
+    middleware.requireAuth,
     upload.single('image'),
     [
         validatorChain.requireTitle,
