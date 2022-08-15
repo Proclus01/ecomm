@@ -1,6 +1,7 @@
 import express from 'express';
-import { validationResult } from 'express-validator';
 import multer from 'multer';
+
+import middleware from './middlewares.js';
 import ProductsRepo from '../../repositories/products.js';
 import productsNewTemplate from '../../views/admin/products/new.js';
 import validatorChain from './validators.js';
@@ -28,13 +29,8 @@ router.post(
         validatorChain.requireTitle,
         validatorChain.requirePrice
     ],
+    middleware.handleErrors(productsNewTemplate),
     async (req, res) => {
-
-        const errors = validationResult(req);
-
-        if (!errors.isEmpty()) {
-            return res.send(productsNewTemplate({ errors }));
-        }
 
         // Store image as base64 to pass around the server, capture title and price
         const image = req.file.buffer.toString('base64');
