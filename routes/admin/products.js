@@ -48,4 +48,10 @@ router.post(
     }
 );
 
+router.get(
+    '/admin/products/:id/edit', 
+    (req, res) => {
+        console.log(req.params.id);
+});
+
 export default router;
