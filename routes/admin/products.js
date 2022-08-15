@@ -32,6 +32,10 @@ router.post(
 
         const errors = validationResult(req);
 
+        if (!errors.isEmpty()) {
+            return res.send(productsNewTemplate({ errors }));
+        }
+
         // Store image as base64 to pass around the server, capture title and price
         const image = req.file.buffer.toString('base64');
         const { title, price } = req.body;
