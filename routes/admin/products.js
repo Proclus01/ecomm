@@ -28,11 +28,14 @@ router.post(
         validatorChain.requirePrice
     ],
     upload.single('image'),
-    (req, res) => {
+    async (req, res) => {
 
         const errors = validationResult(req);
 
-        console.log(req.file.buffer.toString('base64'));
+        // Store image as base64 to pass around the server, capture title and price
+        const image = req.file.buffer.toString('base64');
+        const { title, price } = req.body;
+        await ProductsRepo.create( { title, price, image });
 
         res.send('submitted');
     }
