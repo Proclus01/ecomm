@@ -5,16 +5,34 @@ import helpers from '../../helpers.js';
 const productsNewTemplate = ({ errors }) => {
     return layout({
         content: `
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <h1 class="subtitle">Create a Product</h1>
+  
             <form method="POST" enctype="multipart/form-data">
-                <input placeholder="Title" name="title" />
-                ${helpers.getError(errors, 'title')}
-                <input placeholder="Price" name="price" />
-                ${helpers.getError(errors, 'price')}
+              <div class="field">
+                <label class="label">Title</label>
+                <input class="input" placeholder="Title" name="title">
+                <p class="help is-danger">${helpers.getError(errors, 'title')}</p>
+              </div>
+              
+              <div class="field">
+                <label class="label">Price</label>
+                <input class="input" placeholder="Price" name="price">
+                <p class="help is-danger">${helpers.getError(errors, 'price')}</p>
+              </div>
+              
+              <div class="field">
+                <label class="label">Image</label>            
                 <input type="file" name="image" />
                 ${helpers.getError(errors, 'image')}
-                <button>Submit</button>
+              </div>
+              <br />
+              <button class="button is-primary">Create</button>
             </form>
-        `
+          </div>
+        </div>
+      `
     });
 };
 
