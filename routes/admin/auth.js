@@ -1,5 +1,5 @@
 import express from 'express';
-import { validationResult } from 'express-validator';
+import middleware from './middlewares.js';
 import usersRepo from '../../repositories/users.js';
 import signupTemplate from '../../views/admin/auth/signup.js';
 import signinTemplate from '../../views/admin/auth/signin.js';
@@ -23,17 +23,12 @@ router.post(
         validatorChain.requirePassword,
         validatorChain.requirePasswordConfirmation
     ],
+    middleware.handleErrors(signupTemplate),
     async (req, res) => {
-    // Results of any express-validator errors
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.send(signupTemplate({ req, errors }));
-    }
 
     // Access attributes of email, password, passwordConfirmation in form
     // Save these attributes as user data
-    const { email, password, passwordConfirmation } = req.body;
+    const { email, password } = req.body;
 
     // Create a user in our user repo to represent this person
     const user = await usersRepo.create({ email, password });
@@ -65,13 +60,8 @@ router.post(
         validatorChain.requireEmailExists,
         validatorChain.requireValidPasswordForUser
     ],
+    middleware.handleErrors(signinTemplate),
     async (req, res) => {
-
-    const errors = validationResult(req);
-    
-    if (!errors.isEmpty()) {
-        return res.send(signinTemplate({ req, errors }));
-    }
 
     const { email, password } = req.body;
 
