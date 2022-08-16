@@ -95,4 +95,14 @@ router.post(
     }
 );
 
+router.post(
+    '/admin/products/:id/delete',
+    middleware.requireAuth,
+    async (req, res) => {
+        await ProductsRepo.delete(req.params.id);
+
+        res.redirect('/admin/products');
+    }
+);
+
 export default router;
