@@ -11,3 +11,5 @@ const productsTemplate = ({ products }) => {
         </ul>
     `;
 };
+
+export default productsTemplate;
