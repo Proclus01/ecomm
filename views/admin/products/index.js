@@ -1,9 +1,9 @@
-import layout from '../layout.js';
+import layout from "../layout.js";
 
 const productsIndexTemplate = ({ products }) => {
-
-    const renderedProducts = products.map((product) => {
-        return `
+  const renderedProducts = products
+    .map((product) => {
+      return `
         <tr>
           <td>${product.title}</td>
           <td>${product.price}</td>
@@ -15,14 +15,17 @@ const productsIndexTemplate = ({ products }) => {
             </a>
           </td>
           <td>
-            <button class="button is-danger">Delete</button>
+            <form method="POST" action="/admin/products/${product.id}/delete">
+                <button class="button is-danger">Delete</button>
+            </form>
           </td>
         </tr>
       `;
-    }).join('');
+    })
+    .join("");
 
-    return layout({
-        content: `
+  return layout({
+    content: `
         <div class="control">
           <h1 class="subtitle">Products</h1>  
           <a href="/admin/products/new" class="button is-primary">New Product</a>
@@ -40,8 +43,8 @@ const productsIndexTemplate = ({ products }) => {
             ${renderedProducts}
           </tbody>
         </table>
-      `
-    });
+      `,
+  });
 };
 
 export default productsIndexTemplate;
