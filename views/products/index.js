@@ -1,4 +1,4 @@
-import layout from '../admin/layout.js';
+import layout from '../layout.js';
 
 const productsTemplate = ({ products }) => {
     const renderedProducts = products.map(product => {
