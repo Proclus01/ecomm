@@ -70,7 +70,14 @@ router.post(
         validatorChain.requireTitle,
         validatorChain.requirePrice
     ],
-    middleware.handleErrors(productsEditTemplate),
+    middleware.handleErrors(productsEditTemplate, async (req) => {
+
+        // capture product data on error
+        const product = await ProductsRepo.getOne(req.params.id);
+
+        // and pass it back up to our HTML template in case of an error so it re-renders
+        return { product };
+    }),
     async (req, res) => {
         const changes = req.body;
 
