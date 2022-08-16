@@ -1,9 +1,9 @@
-import helpers from '../../helpers.js';
-import layout from '../layout.js';
+import helpers from "../../helpers.js";
+import layout from "../layout.js";
 
 const productsEditTemplate = ({ product, errors }) => {
-    return layout({
-        content: `
+  return layout({
+    content: `
         <div class="columns is-centered">
           <div class="column is-half">
             <h1 class="subtitle">Edit a Product</h1>
@@ -14,7 +14,10 @@ const productsEditTemplate = ({ product, errors }) => {
                 <input value="${
                   product.title
                 }" class="input" placeholder="Title" name="title">
-                <p class="help is-danger">${helpers.getError(errors, 'title')}</p>
+                <p class="help is-danger">${helpers.getError(
+                  errors,
+                  "title"
+                )}</p>
               </div>
               
               <div class="field">
@@ -22,7 +25,10 @@ const productsEditTemplate = ({ product, errors }) => {
                 <input value="${
                   product.price
                 }" class="input" placeholder="Price" name="price">
-                <p class="help is-danger">${helpers.getError(errors, 'price')}</p>
+                <p class="help is-danger">${helpers.getError(
+                  errors,
+                  "price"
+                )}</p>
               </div>
               
               <div class="field">
@@ -34,8 +40,8 @@ const productsEditTemplate = ({ product, errors }) => {
             </form>
           </div>
         </div>
-      `
-    });
+      `,
+  });
 };
 
 export default productsEditTemplate;
