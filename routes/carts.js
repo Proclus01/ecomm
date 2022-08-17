@@ -6,17 +6,14 @@ const router = express.Router();
 
 // Receive a post request to add an item to a cart
 
-// /cart/products
+router.post(
+    '/cart/products',
+    (req, res) => {
+        console.log(req.body.productId);
 
-// router.get(
-//     '/carts',
-//     async (req, res) => {
-//         const products = await CartsRepo.getAll();
-
-//         // send a carts template
-//     }
-// );
-
+        res.send('Product added to cart');
+    }
+);
 
 // Receive a GET request to show all items in cart
 
