@@ -41,7 +41,7 @@ router.post(
             items: cart.items
         });
         
-        res.send('Product added to cart');
+        res.send(cartShowTemplate({ items: cart.items }));
     }
 );
 

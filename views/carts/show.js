@@ -1,8 +1,9 @@
-import layout from '../layout.js';
+import layout from "../layout.js";
 
 const cartShowTemplate = ({ items }) => {
-    const renderedItems = items.map( (item) => {
-        return `
+  const renderedItems = items
+    .map((item) => {
+      return `
         <div class="cart-item message">
           <h3 class="subtitle">${item.product.title}</h3>
           <div class="cart-right">
@@ -24,10 +25,11 @@ const cartShowTemplate = ({ items }) => {
           </div>
         </div>
       `;
-    }).join('');
+    })
+    .join("");
 
-    return layout({
-        content: `
+  return layout({
+    content: `
         <div id="cart" class="container">
           <div class="columns">
             <div class="column"></div>
@@ -47,8 +49,8 @@ const cartShowTemplate = ({ items }) => {
             <div class="column"></div>
           </div>
         </div>
-      `
-    });
+      `,
+  });
 };
 
 export default cartShowTemplate;
