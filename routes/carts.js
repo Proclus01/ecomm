@@ -79,8 +79,16 @@ router.get(
 router.post('/cart/products/delete', 
     async (req, res) => {
 
-        console.log(req.body.itemId);
+        const { itemId } = req.body;
+        const cart = await CartsRepo.getOne(req.session.cartId);
 
+        // iterate over list of items in cart
+        // find matching item with same id and then issue delete operation to repo
+        const items = cart.items.filter(item => item.id !== itemId);
+
+        await CartsRepo.update(req.session.cartId, { items });
+
+        res.redirect('/cart');
 });
 
 export default router;
