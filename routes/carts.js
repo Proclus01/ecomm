@@ -1,5 +1,6 @@
 import express from 'express';
 import CartsRepo from '../repositories/carts.js';
+import ProductsRepo from '../repositories/products.js';
 // also import carts template
 
 const router = express.Router();
@@ -27,7 +28,6 @@ router.post(
 
         const existingItem = cart.items.find(item => item.id === req.body.productId);
 
-        
         if (existingItem) { 
             // Either increment quantity for existing product
             existingItem.quantity++;
@@ -47,14 +47,30 @@ router.post(
 
 // Receive a GET request to show all items in cart
 
-// router.get(
-//     '/carts',
-//     async (req, res) => {
-//         const products = await CartsRepo.getAll();
+router.get(
+    '/cart',
+    async (req, res) => {
+        // make sure the user has a cart assigned to them
+        if (!req.session.cartId) {
+            return res.redirect('/');
+        } else {
+            // retrieve the cart from the cart repo
+            const cart = await CartsRepo.getOne(req.session.cartId);
+        }
 
-//         // send a carts template
-//     }
-// );
+        // display the list of carts
+
+        // iterate through items array, look through each individual id, 
+        for (let item of cart.items) {
+            const product = await ProductsRepo.getOne(item.id);
+
+            // and go through the products repo for each item
+            item.product = product;
+        }
+        
+        res.send('cartShowTemplate({ items: cart.items })');
+    }
+);
 
 
 // Receive a post request to delete an item from a cart
