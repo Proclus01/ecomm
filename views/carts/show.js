@@ -1,7 +1,20 @@
 import layout from "../layout.js";
 
 const cartShowTemplate = ({ items }) => {
-  const renderedItems = items
+    // let totalPrice = 0;
+
+    // for (let item of items) {
+    //     totalPrice += item.quantity * item.product.price;
+    // }
+
+    // same as above for loop
+    const totalPrice = items.reduce(
+        (prev, item) => {
+            return prev + (item.quantity * item.product.price);
+        }, 0
+    );
+    
+    const renderedItems = items
     .map((item) => {
       return `
         <div class="cart-item message">
@@ -42,7 +55,7 @@ const cartShowTemplate = ({ items }) => {
                 <div class="message-header">
                   Total
                 </div>
-                <h1 class="title">$</h1>
+                <h1 class="title">$${totalPrice}</h1>
                 <button class="button is-primary">Buy</button>
               </div>
             </div>
