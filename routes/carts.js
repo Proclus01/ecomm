@@ -1,7 +1,7 @@
 import express from 'express';
 import CartsRepo from '../repositories/carts.js';
 import ProductsRepo from '../repositories/products.js';
-// also import carts template
+import cartShowTemplate from '../views/carts/show.js';
 
 const router = express.Router();
 
@@ -68,7 +68,7 @@ router.get(
             item.product = product;
         }
         
-        res.send('cartShowTemplate({ items: cart.items })');
+        res.send(cartShowTemplate({ items: cart.items }));
     }
 );
 
