@@ -50,12 +50,14 @@ router.post(
 router.get(
     '/cart',
     async (req, res) => {
+        let cart;
+
         // make sure the user has a cart assigned to them
         if (!req.session.cartId) {
             return res.redirect('/');
         } else {
             // retrieve the cart from the cart repo
-            const cart = await CartsRepo.getOne(req.session.cartId);
+            cart = await CartsRepo.getOne(req.session.cartId);
         }
 
         // display the list of carts
